@@ -164,7 +164,7 @@ session.csv 데이터를 통해 각 유저가 세션에서 총 얼마나 시간�
 
 ​           			         ![img](https://lh3.googleusercontent.com/fBfo00iwVqwhEmZPEZQQm-OyC6z8J_evIi-Oi8LHG_5Iz7RnZZwI7laiZPmFArdyddBeUHEHzuqYWhyGgiBz9DYkRd7ZBVTH5v5SbfayJyPnP63z_We08TXBEnT7YN_Wm7gBHQ)
 
- 			             <1900살이상>                   <18살이하>							,
+ <1900살 이상>과 <18살 이하>
 
    1920-2000의 경우 본인의 생년을 입력한 것으로 추측된다. 따라서 date account created(2010-2014년)의 값을 빼주어 정확한 나이 값으로 대체한다.
 
