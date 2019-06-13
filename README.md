@@ -54,7 +54,7 @@ Index를 여행지로, column을 사용자의 선호 언어로 지정하고 표�
 
 ![img](https://lh4.googleusercontent.com/G2qU82rQ7XbUV6NDKN3A4on8CMrVhF4H9T_JFQMFcutbHwTohvmvbK9KHJYwktMGijLydjAQlikQRYrMqq8sBbJPuXGW0B_rxBuBBC4z_31Ayn7zNKDxr7JBSPcwbWD2CR8xlQ)![img](https://lh6.googleusercontent.com/nL-qUPQKLcVQSb0f8tEk354T4k_WvgxyQ-xcBH7doAFkfiKyh5T9VvHm65dhmUFTRet14mSKEFxXnYPpDlUIw5RsppKDT1lazHKCc5yMVIvAJt4K1SCCzzeZNI6rpNm4pClR_w)
 
-대표적으로 영어, 프랑스어, 스페인어, 독일어 사용자를 살펴보면, 영어 사용자는 영어권 국가로 갈 확률이 75.1%로 다른 언어 사용자보다 높았고, 프랑스어 사용자는 프랑스로 갈 확률이 17.3%, 스페인어 사용자는 스페인으로 갈 확률이 7.27%, 독일어는 8.50%로 모두 각 언어별 그래프에서 2~3위에 해당하는 높은 비중을 차지하고 있음을 알 수 있다.
+대표적으로 영어, 프랑스어, 스페인어, 독일어 사용자를 살펴보면, 영어 사용자는 영어권 국가로 갈 확률이 75.1%로 다른 언어 사용자보다 높았고, 프랑스어 사용자는 프랑스로 갈 확률이 17.3%, 스페인어 사용자는 스페인으로 갈 확률이 7.27%, 독일어는 8.50%로 모두 각 언어별 그래프에서 2-3위에 해당하는 높은 비중을 차지하고 있음을 알 수 있다.
 
 **가설 2,3** : 접속 기기 종류와 세션 접속 횟수, 총 세션 접속 시간이 여행지에 영향을 미칠 것이다. 모바일 사용자이며, 접속 횟수가 낮고 총 세션 접속 시간이 짧으면 신경을 덜 쓴다는 뜻이므로 자국인 미국으로 여행을 갈 것이고, 그 반대라면 미국과 거리가 먼 이국적인 나라로 갈 것이라고 가정하였다.
 
@@ -76,7 +76,7 @@ session.csv 데이터를 통해 각 유저가 세션에서 총 얼마나 시간�
 
 각 기기 중 모바일 사용률만 합친 결과, 극단적으로 모바일을 사용하는 사람과 그렇지 않은 사람이 관측되었고, 나머지 구간은 골고루 사용자가 분포하고 있음을 알 수 있었다. 
 
-따라서 0.0~0.1 구간을 not_frequent_users로 구분하고, 0.9~1.0구간을 frequent_users로 구분하고 임의로 시각화를 진행하였다.
+따라서 0.0-0.1 구간을 not_frequent_users로 구분하고, 0.9-1.0구간을 frequent_users로 구분하고 임의로 시각화를 진행하였다.
 
 ![img](https://lh6.googleusercontent.com/hSDN_CBoGI4R2m1oLmaJga6wzcEYPnwa_pE0aZC4QR1lSNdmzJRS1ET758aOz0GcqMLru487rNzrpENc2GVTfirFO7FL2U5beT6C6FHof9nwdYvi6dXHw4rtsQ9ylOEh5fBpPw)![img](https://lh4.googleusercontent.com/isciVy5kvbgk_9eDQw-AM2RknDPbIVhuazohBSt_t1JUyNFEf6oWZAySfU7IkWlCiahwyHm1lvWy0y8vmJBy-Z0kDgg_MyspMvBZNcKFkvVp3OhALhf4pFjDmY9y5MxlozrhCg)
 
@@ -166,7 +166,7 @@ session.csv 데이터를 통해 각 유저가 세션에서 총 얼마나 시간�
 
  			             <1900살이상>                   <18살이하>							,
 
-   1920~2000의 경우 본인의 생년을 입력한 것으로 추측된다. 따라서 date account created(2010~2014년)의 값을 빼주어 정확한 나이 값으로 대체한다.
+   1920-2000의 경우 본인의 생년을 입력한 것으로 추측된다. 따라서 date account created(2010-2014년)의 값을 빼주어 정확한 나이 값으로 대체한다.
 
  2000년 이상인 경우 date account created을 빼주어도 최대 10살이 된다. 미국의 경우 11살부터 중학생에 해당하게 되는데 초등학생이 에어비앤비를 예약하는 것은 합리적이지 않아 Missing Value로 처리한다.
 
