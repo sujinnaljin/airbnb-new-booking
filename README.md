@@ -16,13 +16,13 @@
 
 ### **Visualizing Data**
 
---train user 클래스 분포
+**train user 클래스 분포**
 
 ![img](https://lh5.googleusercontent.com/RQoC1bR51fPcnZ9slYM7Wprx4arsICb2EoGhDUWkRUYW-oGm5kPSE6_P_E09kJdFnCqrcK87wqUpboLqyw-kM5BEaDFbjJbJCPgbwNSWf4_Mt5qi5gbZ1kUcxtFKVFlCJ2S_iw)
 
  Training set의 클래스 분포를 확인하면 Class imbalance가 심한 과제임을 알 수 있다. Loss function에서 각 class별로 weight가 빈도수에 반비례하도록 실험을 해보았지만  PT와 NDF의 경우 300배 이상 차이나기 때문에 결과값에 왜곡이 많이 생겨 이를 채택할 수 없었다. 이후의 hyperparameter 조정을 위한 Subsampling for Validation 항목에서는 어느정도 클래스 불균형 문제를 감안하여 subsampling을 하였다.
 
---Date Account Created/First Active
+**Date Account Created/First Active**
 
 ![img](https://lh4.googleusercontent.com/fEZNcg2WVu9QAcjudFGNmFAK9uU2S4Gd1b3gRVxZHu9o5-80sD_-pRvGGtJX6ylmECXHoTOy4SrU_OTw4R5oEJ4SysoTp6W_XUDWxTcdzArvyrTl--ydFPBwt6wpnr2gTEXwFQ)
 
@@ -30,13 +30,13 @@
 
 에어비앤비가 유명해지기 시작한 2014년을 기준으로 가입자 수가 증가한 것을 확인할 수 있다.
 
---2014년 전후 여행지 비교
+**2014년 전후 여행지 비교**
 
 ![img](https://lh3.googleusercontent.com/bLYkfxD_1-EcWSVL5xPpuL8jb8UY7GIPUgoti5biKkkAFx3i9M30rsUtIwJm61LXiSCa4QpxEDzFuQ6QJjhGZ2Wxte3q6H1s9Mlijjm9EfUiGqOD3k86gho66ydvYcM9U_Dz6A)
 
  2014년 이후 에어비앤비가 유명세를 타면서 단순 가격 비교 차원에서 가입을 하는 경우가 늘어 NDF가 증가했다고 생각해 볼 수 있다.
 
---Holiday에 따른 여행지 비교
+**Holiday에 따른 여행지 비교**
 
 ![img](https://lh4.googleusercontent.com/7hJ_kkTgUf5P4MUDiXqCCQIUx1-R_kQA-wILp4gR3QnQuJj1nQiThVpkNI5a7toorLxW-aWNLt6P8Lo69QVCMX9uoJPbN0Dn2ZA8koSHeF-f0zTXP2FpOA481_41TiUmm89aSg)![img](https://lh3.googleusercontent.com/rsdi7MSe26MHX2sDn29P9ztfoyYznVJ3Ee1z3dxocGJac3wBygYS6YmRPJ7btl-lrP0FTlv4o0pIXaFSgQ27MrmK2anWiHeGA3faKW1U70anvzQYqG2fAXo4KyVcBUkTSJ8ZVg)
 
@@ -138,7 +138,7 @@ session.csv 데이터를 통해 각 유저가 세션에서 총 얼마나 시간�
 
 ### **Fill in Missing Data**
 
-####Gender
+#### Gender
 
 ##### a ) Gender 구성
 
@@ -232,15 +232,17 @@ Subsample을 생성할 때 두 가지 방안이 있었는데, 한 가지는 기�
 
 Logistic Regression의 hyperparameter를 찾기 위해 GirdSearch CV에 비해 실행 시간이 적게 들면서도 성능이 현저히 떨어지지 않는  RandomizedSearchCV를 실행하였다. 이를 위해 우선 fitting 에 사용할 parameter grid를 설정하였고 그 값은 다음과 같다.
 
+```python
 penalty =  ['l1', 'l2']
-
 C = [0.001,0.01,0.1,1,10,100]
+```
 
 가장 최적의 성능을 보이는 parameter의 조합은 다음과 같다.
 
+```python
 {'C': 1, 
-
  'penalty': 'l1'}
+```
 
 L2 norm보다는 L1 norm을 이용한 regularization이 선호된 것으로 보아 prediction에 도움이 되지 않는 feature이 많은 것으로 추측된다.
 
@@ -248,61 +250,51 @@ L2 norm보다는 L1 norm을 이용한 regularization이 선호된 것으로 보�
 
 RandomForest의 hyperparameter를 찾기 위해 GirdSearch CV를 실행하였다. fitting 에 사용할 parameter grid 값은 다음과 같다.
 
+```python
 n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 10)]
-
 max_features = ['auto', 'sqrt']
-
 max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
-
 max_depth.append(None)
-
 min_samples_split = [2, 5, 10]
-
 min_samples_leaf = [1, 2, 4]
-
 bootstrap = [True, False]
+```
 
 가장 최적의 성능을 보이는 parameter의 조합은 다음과 같다.
-
+```python
 {'bootstrap': True,
-
  'max_depth': 10,
-
  'max_features': 'sqrt',
-
  'min_samples_leaf': 2,
-
  'min_samples_split': 5,
-
  'n_estimators': 200}
+```
+
+
 
 #### **Xgboost**
 
 Xgboost의 hyperparameter를 찾기 위해 GirdSearch CV를 실행하였다. fitting 에 사용할 parameter grid 값은 다음과 같다.
-
+```python
 min_child_weight = [1, 5, 10]
-
 gamma = [0.5, 1, 1.5, 2, 5]
-
 subsample = [0.6, 0.8, 1.0]
-
 colsample_bytree = [0.6, 0.8, 1.0]
-
 max_depth = [3, 4, 5]
+```
 
- 
+
 
 가장 최적의 성능을 보이는 parameter의 조합은 다음과 같다.
-
+```python
 {'colsample_bytree': 0.6,
-
  'gamma': 5,
-
  'max_depth': 5,
-
  'min_child_weight': 5,
-
  'subsample': 1.0}
+```
+
+
 
 #### **CatBoost**
 
@@ -328,27 +320,25 @@ CatBoostClassifier 파라미터에 해당하는 depth의 적합한 값을 찾기
 
 따라서 CatBoostClassifier의 parameter은 다음과 같이 설정하였다.
 
+```python
 iterations=95
-
 learning_rate=0.1
-
 depth=5
-
 task_type='GPU'
-
 loss_function='MultiClass'
-
 eval_metric='MultiClass'
+```
+
+
 
 #### **Neural Network**
 
 Neural Network 모델에서 적합한 coefficient, hidden layer, hidden layer 당 노드 수, batch size를 찾기 위해 수동으로 테스트를 진행하였으며 fitting 에 사용한 parameter grid 값은 다음과 같다.
-
+```python
 Regularization = [l1(0.01), l1(0.001)]
-
 hidden layer and nodes = [(2, (64, 32)), (2, (128, 64)), (3, (128, 64,32)), (3, (256, 64, 32))]
-
 batch_size=[10,100]
+```
 
 -->batch size가 10일 때는 컴퓨팅 파워의 한계로 l1(0.01)만 적용하였다.
 
@@ -365,33 +355,41 @@ batch_size=[10,100]
 
 --batch size :10
 
+```python
 3layer(128,64,32 nodes):1.2045
-
 2layer(64,32 nodes):1.2174 
+```
+
+
 
 표에서 볼 수 있듯 최적의 성능을 보이는 parameter의 조합은 다음과 같다.
-
+```python
 {'Regularization': l1(0.01),
-
  'Hidden Layers and Nodes/: 3layer(128,64,32 nodes),’batch size’:100}
+```
+
+
 
 #### **LGBM (Light Gradient Boosting Machine)**
 
 LGBM의 hyperparameter를 찾기 위해 GirdSearch CV를 실행하였다. fitting 에 사용할 parameter grid 값은 다음과 같다.
-
+```python
 learning_rate = [0.01, 0.1, 0.5]
-
 max_depth = [5, 8, 10]
-
 num_leaves = [10,15, 50]
+```
+
+
 
 가장 최적의 성능을 보이는 parameter의 조합은 다음과 같다.
 
+```python
 {'num_leaves': 10, 
-
  'max_depth': 5, 
-
  'learning_rate': 0.01}
+```
+
+
 
 #### **Ensemble**
 
@@ -409,17 +407,25 @@ num_leaves = [10,15, 50]
 
 --batch size:100 일때
 
+```python
 2layer(64,32 nodes) : 1.1874 
 
 2layer(128,64 nodes): 1.1411  -->score: 0.86943
 
 3layer(256,128,64 nodes) : 1.2286
+```
+
+
 
 --batch size:10일때
 
+```python
 2layer(128,64 nodes):1.0986   -->score: 0.87014
 
 2layer(64,32 nodes):  1.0997
+```
+
+
 
 --Random Forest
 
